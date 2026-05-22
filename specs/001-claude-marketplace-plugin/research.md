@@ -7,6 +7,7 @@
 **Rationale**: The spec requires users to "install the marketplace and plugin from a github url." Hosting both in one repo means a single GitHub URL covers the whole install flow: add this repo as a marketplace, then install the plugin listed in it.
 
 **Alternatives considered**:
+
 - Separate marketplace repo: Adds unnecessary indirection with no benefit for a single-plugin distribution.
 - Plugin-only (no marketplace): Users would need to configure `extraKnownMarketplaces` in `settings.json` manually, which is less discoverable.
 
@@ -19,6 +20,7 @@
 **Rationale**: The constitution requires TypeScript for all new code and vitest for tests. Bundling to single-file JS with esbuild means installed plugins have no runtime npm dependencies. Committing `dist/` lets Claude Code install the plugin from GitHub without requiring a post-install build.
 
 **Alternatives considered**:
+
 - Pure bash scripts: Cannot be tested with vitest; conflicts with the TypeScript-first constitution.
 - `tsx` / `ts-node` at runtime: Adds a runtime dependency not guaranteed to be present on the user's machine; slower startup.
 - Shell wrappers delegating to Node.js: Adds an unnecessary layer; `node` can be invoked directly from `hooks.json`.
@@ -32,6 +34,7 @@
 **Rationale**: This is the documented Claude Code hook contract. Exit code 2 causes Claude Code to treat stderr as the error message and abort the tool call. Exit code 0 passes control to the normal permission flow.
 
 **Alternatives considered**:
+
 - JSON output with `permissionDecision: "deny"`: Supported but more verbose; stderr + exit 2 is simpler and equally effective.
 
 ---
@@ -43,15 +46,18 @@
 **Rationale**: `CLAUDE_PROJECT_DIR` is available as an environment variable in hook scripts and equals the project working directory. `process.cwd()` in Node.js reflects the same value without requiring additional env var parsing.
 
 **Alternatives considered**:
+
 - Parse `CLAUDE_PROJECT_DIR` env var: Equivalent value; `process.cwd()` is more idiomatic in Node.js.
 
 ---
 
 ## Decision 5: Path Normalization for Redundant-cd Comparison
 
-**Decision**: Before comparing the `cd` target to CWD, both are normalized by converting backslashes to forward slashes and lowercasing (for case-insensitive Windows comparison). Trailing slashes are stripped.
+**Decision**: Before comparing the `cd` target to CWD, both are normalized by passing through path.resolve() then path.normalize(). The path.resolve() call can use CWD as the base directory.
 
-**Rationale**: On Windows, `C:\code\project` and `C:/code/project` represent the same path. Case is also irrelevant on Windows. Normalization prevents false negatives where the path is equivalent but not identical as a string.
+**Rationale**: node.js's normalization function is widely used and should be fairly robust. While it doesn't account for differences in case sensitivity we haven't seen evidence case changing is an issue of concern.
 
 **Alternatives considered**:
-- `path.resolve()`: Requires knowing the base directory; `process.cwd()` is already resolved, so normalization is sufficient.
+
+- lowercasing: not always appropriate and not demonstrated to be worth the effort.
+- custom string manipulation: risks running into edge cases node.js's methods already consider

@@ -16,7 +16,7 @@ Defines this repository as a Claude Code plugin.
 ```json
 {
   "name": "nosabokit",
-  "description": "Pre-tool hooks that block Windows backslash paths and redundant cd prefixes",
+  "description": "artisanal bespoke claude plugin",
   "version": "1.0.0",
   "author": { "name": "fschwiet" }
 }
@@ -45,7 +45,7 @@ Defines this repository as a Claude Code marketplace that lists its own plugin.
     {
       "name": "nosabokit",
       "source": ".",
-      "description": "Pre-tool hooks that block Windows backslash paths and redundant cd prefixes"
+      "description": "artisanal bespoke claude plugin"
     }
   ]
 }

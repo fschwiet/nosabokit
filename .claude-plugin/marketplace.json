@@ -7,7 +7,7 @@
     {
       "name": "nosabokit",
       "source": ".",
-      "description": "Pre-tool hooks that block Windows backslash paths and redundant cd prefixes in Bash commands"
+      "description": "artisanal bespoke claude plugin"
     }
   ]
 }

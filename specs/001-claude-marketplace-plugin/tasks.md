@@ -24,14 +24,14 @@ description: "Task list for Claude Marketplace Plugin implementation"
 
 **Purpose**: Initialize the Node.js/TypeScript project with all required tooling so quality gates can be run from day one.
 
-- [ ] T001 Create directory structure: `src/hooks/`, `src/lib/`, `dist/hooks/`, `tests/unit/`, `hooks/`, `.claude-plugin/`
-- [ ] T002 Create `package.json` with name `nosabokit`, scripts (`test`, `build`, `lint`, `format:check`, `typecheck`, `check`), and devDependencies: `typescript`, `vitest`, `esbuild`, `eslint`, `prettier`, `@types/node`
-- [ ] T003 [P] Create `tsconfig.json` with `"strict": true`, `rootDir: "src"`, `outDir: "dist"`, target `ES2020`, module `CommonJS`
-- [ ] T004 [P] Create `eslint.config.js` using flat config with TypeScript rules
-- [ ] T005 [P] Create `.prettierrc` with project formatting rules
-- [ ] T006 [P] Create `vitest.config.ts` pointing test include pattern to `tests/**/*.test.ts`
-- [ ] T007 [P] Create `.gitignore` including `node_modules/` but explicitly NOT ignoring `dist/` (dist is committed per research Decision 2)
-- [ ] T008 [P] Add esbuild bundle script `scripts/build.ts` (or inline in package.json `build` script) that produces `dist/hooks/check-backslash-paths.js` and `dist/hooks/check-redundant-cd.js` as self-contained bundles with `platform: "node"`, `bundle: true`, `format: "cjs"`
+- [x] T001 Create directory structure: `src/hooks/`, `src/lib/`, `dist/hooks/`, `tests/unit/`, `hooks/`, `.claude-plugin/`
+- [x] T002 Create `package.json` with name `nosabokit`, scripts (`test`, `build`, `lint`, `format:check`, `typecheck`, `check`), and devDependencies: `typescript`, `vitest`, `esbuild`, `eslint`, `prettier`, `@types/node`
+- [x] T003 [P] Create `tsconfig.json` with `"strict": true`, `rootDir: "src"`, `outDir: "dist"`, target `ES2020`, module `CommonJS`
+- [x] T004 [P] Create `eslint.config.js` using flat config with TypeScript rules
+- [x] T005 [P] Create `.prettierrc` with project formatting rules
+- [x] T006 [P] Create `vitest.config.ts` pointing test include pattern to `tests/**/*.test.ts`
+- [x] T007 [P] Create `.gitignore` including `node_modules/` but explicitly NOT ignoring `dist/` (dist is committed per research Decision 2)
+- [x] T008 [P] Add esbuild bundle script `scripts/build.ts` (or inline in package.json `build` script) that produces `dist/hooks/check-backslash-paths.js` and `dist/hooks/check-redundant-cd.js` as self-contained bundles with `platform: "node"`, `bundle: true`, `format: "cjs"`
 
 ---
 
@@ -41,9 +41,9 @@ description: "Task list for Claude Marketplace Plugin implementation"
 
 **⚠️ CRITICAL**: No user story implementation can be verified end-to-end until this phase is complete.
 
-- [ ] T009 Create `.claude-plugin/plugin.json` per data-model.md: `name: "nosabokit"`, `description`, `version: "1.0.0"`, `author`
-- [ ] T010 Create `.claude-plugin/marketplace.json` per data-model.md: `name: "nosabokit"`, `owner`, `plugins` array listing this plugin with `source: "."`
-- [ ] T011 Create `hooks/hooks.json` with `PreToolUse` → `Bash` matcher → two `command` hooks invoking `node "${CLAUDE_PLUGIN_ROOT}/dist/hooks/check-backslash-paths.js"` and `node "${CLAUDE_PLUGIN_ROOT}/dist/hooks/check-redundant-cd.js"` (per contracts/hook-interface.md)
+- [x] T009 Create `.claude-plugin/plugin.json` per data-model.md: `name: "nosabokit"`, `description`, `version: "1.0.0"`, `author`
+- [x] T010 Create `.claude-plugin/marketplace.json` per data-model.md: `name: "nosabokit"`, `owner`, `plugins` array listing this plugin with `source: "."`
+- [x] T011 Create `hooks/hooks.json` with `PreToolUse` → `Bash` matcher → two `command` hooks invoking `node "${CLAUDE_PLUGIN_ROOT}/dist/hooks/check-backslash-paths.js"` and `node "${CLAUDE_PLUGIN_ROOT}/dist/hooks/check-redundant-cd.js"` (per contracts/hook-interface.md)
 
 **Checkpoint**: Plugin scaffold is complete — Claude Code can discover the marketplace and install the plugin structure, though hook scripts are not yet implemented.
 
@@ -57,11 +57,11 @@ description: "Task list for Claude Marketplace Plugin implementation"
 
 ### Tests for User Story 1
 
-- [ ] T012 [US1] Write unit test in `tests/unit/plugin-structure.test.ts` that validates `plugin.json` and `marketplace.json` parse as valid JSON and contain required fields (`name`, `version`, `plugins`)
+- [x] T012 [US1] Write unit test in `tests/unit/plugin-structure.test.ts` that validates `plugin.json` and `marketplace.json` parse as valid JSON and contain required fields (`name`, `version`, `plugins`)
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Write `README.md` documenting: (1) adding the marketplace via `/plugin marketplace add github:fschwiet/nosabokit`, (2) installing the plugin via `/plugin install nosabokit@nosabokit`, (3) verifying activation, (4) prerequisites (Claude Code with plugin support)
+- [x] T013 [US1] Write `README.md` documenting: (1) adding the marketplace via `/plugin marketplace add github:fschwiet/nosabokit`, (2) installing the plugin via `/plugin install nosabokit@nosabokit`, (3) verifying activation, (4) prerequisites (Claude Code with plugin support)
 
 **Checkpoint**: User Story 1 is independently testable — the install flow documented in README.md can be followed and the plugin structure verified.
 
@@ -77,13 +77,13 @@ description: "Task list for Claude Marketplace Plugin implementation"
 
 > **Write tests FIRST, verify they FAIL before writing implementation**
 
-- [ ] T014 [US2] Write unit tests in `tests/unit/check-backslash-paths.test.ts` covering: (a) `C:\Users\name` → blocked, (b) `D:\Projects\app` → blocked, (c) command with `<<` heredoc AND backslash → allowed, (d) forward-slash-only command → allowed, (e) empty command → allowed, (f) `C:\1digits` (no letter after backslash) → allowed
+- [x] T014 [US2] Write unit tests in `tests/unit/check-backslash-paths.test.ts` covering: (a) `C:\Users\name` → blocked, (b) `D:\Projects\app` → blocked, (c) command with `<<` heredoc AND backslash → allowed, (d) forward-slash-only command → allowed, (e) empty command → allowed, (f) `C:\1digits` (no letter after backslash) → allowed
 
 ### Implementation for User Story 2
 
-- [ ] T015 [P] [US2] Implement pure logic in `src/lib/check-backslash-paths.ts`: export `checkBackslashPaths(cmd: string): { block: boolean; reason?: string }` using regex `/[A-Za-z]:\\[A-Za-z]/` with heredoc skip for `<<`
-- [ ] T016 [US2] Implement hook entry point in `src/hooks/check-backslash-paths.ts`: read stdin to string, parse JSON, extract `tool_input.command`, call `checkBackslashPaths`, write reason to `process.stderr` and `process.exit(2)` if blocked, else `process.exit(0)`
-- [ ] T017 [US2] Run `npm run build` and commit generated `dist/hooks/check-backslash-paths.js`
+- [x] T015 [P] [US2] Implement pure logic in `src/lib/check-backslash-paths.ts`: export `checkBackslashPaths(cmd: string): { block: boolean; reason?: string }` using regex `/[A-Za-z]:\\[A-Za-z]/` with heredoc skip for `<<`
+- [x] T016 [US2] Implement hook entry point in `src/hooks/check-backslash-paths.ts`: read stdin to string, parse JSON, extract `tool_input.command`, call `checkBackslashPaths`, write reason to `process.stderr` and `process.exit(2)` if blocked, else `process.exit(0)`
+- [x] T017 [US2] Run `npm run build` and commit generated `dist/hooks/check-backslash-paths.js`
 
 **Checkpoint**: User Story 2 is independently testable — hook blocks Windows backslash paths and allows forward-slash and heredoc commands.
 
@@ -99,13 +99,13 @@ description: "Task list for Claude Marketplace Plugin implementation"
 
 > **Write tests FIRST, verify they FAIL before writing implementation**
 
-- [ ] T018 [US3] Write unit tests in `tests/unit/check-redundant-cd.test.ts` covering: (a) `cd /code/project && npm test` with matching CWD → blocked, message includes `npm test`, (b) `cd /other/path && git status` with different CWD → allowed, (c) plain `git status` (no cd) → allowed, (d) `cd "/code/project" && npm test` (quoted path) with matching CWD → blocked, (e) `cd /code/project/ && npm test` (trailing slash) with `/code/project` CWD → blocked (normalization), (f) `cd C:/code/project && npm test` with Windows-style CWD `C:/code/project` → blocked
+- [x] T018 [US3] Write unit tests in `tests/unit/check-redundant-cd.test.ts` covering: (a) `cd /code/project && npm test` with matching CWD → blocked, message includes `npm test`, (b) `cd /other/path && git status` with different CWD → allowed, (c) plain `git status` (no cd) → allowed, (d) `cd "/code/project" && npm test` (quoted path) with matching CWD → blocked, (e) `cd /code/project/ && npm test` (trailing slash) with `/code/project` CWD → blocked (normalization), (f) `cd C:/code/project && npm test` with Windows-style CWD `C:/code/project` → blocked
 
 ### Implementation for User Story 3
 
-- [ ] T019 [P] [US3] Implement pure logic in `src/lib/check-redundant-cd.ts`: export `checkRedundantCd(cmd: string, cwd: string): { block: boolean; reason?: string }` using regex `/^cd\s+("?)([^"&]+)\1\s*&&\s*(.+)$/s`, normalizing both paths via `path.resolve()` then `path.normalize()` before comparing
-- [ ] T020 [US3] Implement hook entry point in `src/hooks/check-redundant-cd.ts`: read stdin, parse JSON, extract `tool_input.command`, call `checkRedundantCd(command, process.cwd())`, write reason to `process.stderr` and `process.exit(2)` if blocked, else `process.exit(0)`
-- [ ] T021 [US3] Run `npm run build` and commit generated `dist/hooks/check-redundant-cd.js`
+- [x] T019 [P] [US3] Implement pure logic in `src/lib/check-redundant-cd.ts`: export `checkRedundantCd(cmd: string, cwd: string): { block: boolean; reason?: string }` using regex `/^cd\s+("?)([^"&]+)\1\s*&&\s*(.+)$/s`, normalizing both paths via `path.resolve()` then `path.normalize()` before comparing
+- [x] T020 [US3] Implement hook entry point in `src/hooks/check-redundant-cd.ts`: read stdin, parse JSON, extract `tool_input.command`, call `checkRedundantCd(command, process.cwd())`, write reason to `process.stderr` and `process.exit(2)` if blocked, else `process.exit(0)`
+- [x] T021 [US3] Run `npm run build` and commit generated `dist/hooks/check-redundant-cd.js`
 
 **Checkpoint**: User Story 3 is independently testable — hook blocks redundant cd prefixes matching CWD and allows all other commands.
 
@@ -115,9 +115,9 @@ description: "Task list for Claude Marketplace Plugin implementation"
 
 **Purpose**: Quality gates, final integration verification, and release readiness.
 
-- [ ] T022 [P] Run `npm run check` (lint + format + typecheck) and fix any violations before merge
-- [ ] T023 [P] Run `npm test` and confirm all unit tests pass
-- [ ] T024 Update `README.md` with: developer quickstart link (`specs/001-claude-marketplace-plugin/quickstart.md`), badge or status note, and link to hook behavior documentation
+- [x] T022 [P] Run `npm run check` (lint + format + typecheck) and fix any violations before merge
+- [x] T023 [P] Run `npm test` and confirm all unit tests pass
+- [x] T024 Update `README.md` with: developer quickstart link (`specs/001-claude-marketplace-plugin/quickstart.md`), badge or status note, and link to hook behavior documentation
 - [ ] T025 Verify end-to-end: follow README install steps, trigger a Windows backslash path command, and a redundant-cd command, and confirm both are blocked with correct messages
 
 ---

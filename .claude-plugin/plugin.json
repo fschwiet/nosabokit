@@ -1,0 +1,8 @@
+{
+  "name": "nosabokit",
+  "description": "Pre-tool hooks that block Windows backslash paths and redundant cd prefixes in Bash commands",
+  "version": "1.0.0",
+  "author": {
+    "name": "fschwiet"
+  }
+}

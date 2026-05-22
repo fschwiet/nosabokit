@@ -67,16 +67,6 @@ Premature generalization is a violation of this principle.
 **Rationale**: Unused code is a maintenance burden and obscures intent. Building
 only what is needed now keeps the codebase lean and changeable.
 
-### V. KISS (Keep It Simple, Stupid)
-
-The simplest solution that satisfies current requirements MUST be chosen.
-Complexity MUST be justified by a concrete, present need. Three similar lines
-are preferable to a premature abstraction. Design for hypothetical future
-requirements is prohibited (see Principle IV).
-
-**Rationale**: Simple code is easier to read, test, debug, and evolve.
-Complexity compounds; simplicity pays dividends over time.
-
 ## Technology Stack
 
 - **Language**: TypeScript (latest stable)

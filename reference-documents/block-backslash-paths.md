@@ -6,7 +6,7 @@ function checkBackslashPaths(cmd: string): boolean {
   if (/[A-Za-z]:\\[A-Za-z]/.test(cmd)) {
     blockForReason(
       "Windows backslash paths are mangled by Git Bash (\\g, \\s, etc. become escape sequences). " +
-        "Use forward slashes instead (e.g. C:/Users/BobbyJohnson/src/...). " +
+        "Use forward slashes instead (e.g. C:/Users/username/src/...). " +
         "PowerShell handles forward slashes fine on Windows."
     );
     return true;

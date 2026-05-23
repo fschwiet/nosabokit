@@ -1,6 +1,6 @@
 # nosabokit
 
-A Claude Code plugin that provides two pre-tool hooks for safer command execution on Windows:
+A Claude Code plugin where I can accumulate some claude configurations I care about.
 
 1. **Block backslash paths** — Prevents Bash commands that contain Windows-style backslash paths (e.g. `C:\Users\name`), which Git Bash silently mangles into escape sequences. Suggests using forward slashes instead.
 2. **Block redundant `cd`** — Prevents commands of the form `cd <current-dir> && <rest>`, which add unnecessary permission prompts without changing the working directory.
@@ -33,16 +33,19 @@ When prompted, trust the marketplace.
 Use these prompts to confirm all three hook behaviors. Replace `C:/code/nosabokit` with your own working directory in each prompt.
 
 **1. Bash backslash path is blocked:**
+
 > Run the bash command "ls C:\code\nosabokit" and tell me the output
 
 Expected: blocked with a message about backslash paths being mangled by Git Bash.
 
 **2. Bash redundant cd is blocked:**
+
 > Run the bash command "cd C:/code/nosabokit && ls" and tell me the output
 
 Expected: blocked with a message saying the cd is redundant and suggesting to just run `ls`.
 
 **3. PowerShell redundant cd is blocked:**
+
 > Run the PowerShell command "cd C:/code/nosabokit && ls" and tell me the output
 
 Expected: blocked with the same redundant cd message.

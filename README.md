@@ -25,9 +25,22 @@ When prompted, trust the marketplace.
 
 ### Step 3 — Verify activation
 
-After installation, Claude Code will run both hooks before every Bash command. You can verify by asking Claude to run a command with a Windows backslash path — it should be blocked with a message like:
+Use these prompts to confirm all three hook behaviors. Replace `C:/code/nosabokit` with your own working directory in each prompt.
 
-> Windows backslash paths are mangled by Git Bash (\g, \s, etc. become escape sequences). Use forward slashes instead (e.g. C:/Users/name/src/...). PowerShell handles forward slashes fine on Windows.
+**1. Bash backslash path is blocked:**
+> Run the bash command "ls C:\code\nosabokit" and tell me the output
+
+Expected: blocked with a message about backslash paths being mangled by Git Bash.
+
+**2. Bash redundant cd is blocked:**
+> Run the bash command "cd C:/code/nosabokit && ls" and tell me the output
+
+Expected: blocked with a message saying the cd is redundant and suggesting to just run `ls`.
+
+**3. PowerShell redundant cd is blocked:**
+> Run the PowerShell command "cd C:/code/nosabokit && ls" and tell me the output
+
+Expected: blocked with the same redundant cd message.
 
 ## Prerequisites
 

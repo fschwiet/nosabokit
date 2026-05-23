@@ -118,7 +118,7 @@ description: "Task list for Claude Marketplace Plugin implementation"
 - [x] T022 [P] Run `npm run check` (lint + format + typecheck) and fix any violations before merge
 - [x] T023 [P] Run `npm test` and confirm all unit tests pass
 - [x] T024 Update `README.md` with: developer quickstart link (`specs/001-claude-marketplace-plugin/quickstart.md`), badge or status note, and link to hook behavior documentation
-- [ ] T025 Verify end-to-end: follow README install steps, trigger a Windows backslash path command, and a redundant-cd command, and confirm both are blocked with correct messages
+- [x] T025 Verify end-to-end: follow README install steps, trigger a Windows backslash path command, and a redundant-cd command, and confirm both are blocked with correct messages
 
 ---
 

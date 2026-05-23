@@ -44,7 +44,7 @@ Defines this repository as a Claude Code marketplace that lists its own plugin.
   "plugins": [
     {
       "name": "nosabokit",
-      "source": ".",
+      "source": "./",
       "description": "artisanal bespoke claude plugin"
     }
   ]

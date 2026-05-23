@@ -12,7 +12,7 @@ A Claude Code plugin that provides two pre-tool hooks for safer command executio
 In Claude Code, run:
 
 ```
-/plugin marketplace add github:fschwiet/nosabokit
+/plugin marketplace add fschwiet/nosabokit
 ```
 
 When prompted, trust the marketplace.

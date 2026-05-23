@@ -42,7 +42,7 @@ description: "Task list for Claude Marketplace Plugin implementation"
 **⚠️ CRITICAL**: No user story implementation can be verified end-to-end until this phase is complete.
 
 - [x] T009 Create `.claude-plugin/plugin.json` per data-model.md: `name: "nosabokit"`, `description`, `version: "1.0.0"`, `author`
-- [x] T010 Create `.claude-plugin/marketplace.json` per data-model.md: `name: "nosabokit"`, `owner`, `plugins` array listing this plugin with `source: "."`
+- [x] T010 Create `.claude-plugin/marketplace.json` per data-model.md: `name: "nosabokit"`, `owner`, `plugins` array listing this plugin with `source: "./"`
 - [x] T011 Create `hooks/hooks.json` with `PreToolUse` → `Bash` matcher → two `command` hooks invoking `node "${CLAUDE_PLUGIN_ROOT}/dist/hooks/check-backslash-paths.js"` and `node "${CLAUDE_PLUGIN_ROOT}/dist/hooks/check-redundant-cd.js"` (per contracts/hook-interface.md)
 
 **Checkpoint**: Plugin scaffold is complete — Claude Code can discover the marketplace and install the plugin structure, though hook scripts are not yet implemented.

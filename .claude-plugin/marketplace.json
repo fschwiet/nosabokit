@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "nosabokit",
-      "source": ".",
+      "source": "./",
       "description": "artisanal bespoke claude plugin"
     }
   ]

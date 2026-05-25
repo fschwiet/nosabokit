@@ -89,3 +89,13 @@ Here is a log entry that shows a sample of a tool use intended to be blocked. No
   "gitBranch": "001-claude-marketplace-plugin"
 }
 ```
+
+For powershell at least we also need to handle a ';' separator:
+
+```
+{
+  "command": "cd C:\\code\\gradoglot; .\\gradlew.bat testDebugUnitTest 2>&1",
+  "description": "Run unit tests via Gradle wrapper",
+  "timeout": 300000
+}
+```

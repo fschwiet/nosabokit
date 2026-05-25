@@ -1,6 +1,6 @@
 // src/lib/check-redundant-cd.ts
 import { resolve, normalize } from "path";
-var CD_PATTERN = /^cd\s+("?)([^"&]+)\1\s*&&\s*(.+)$/s;
+var CD_PATTERN = /^cd\s+("?)([^"&;]+)\1\s*(?:&&|;)\s*(.+)$/s;
 function normalizePath(p) {
   return normalize(resolve(p)).replace(/\\/g, "/").replace(/\/$/, "");
 }

@@ -1,6 +1,6 @@
 import { resolve, normalize } from "path";
 
-const CD_PATTERN = /^cd\s+("?)([^"&]+)\1\s*&&\s*(.+)$/s;
+const CD_PATTERN = /^cd\s+("?)([^"&;]+)\1\s*(?:&&|;)\s*(.+)$/s;
 
 export interface CheckResult {
   block: boolean;

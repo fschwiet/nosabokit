@@ -2,8 +2,13 @@ import { describe, it, expect } from "vitest";
 import { checkRedundantCd } from "../../src/lib/check-redundant-cd";
 
 describe("checkRedundantCd", () => {
-  it("blocks when cd target matches cwd", () => {
+  it("blocks when cd target matches cwd and command is appended with &&", () => {
     const result = checkRedundantCd("cd /code/project && npm test", "/code/project");
+    expect(result.block).toBe(true);
+  });
+
+  it("blocks when cd target matches cwd and command is appended with ;", () => {
+    const result = checkRedundantCd("cd /code/project; npm test", "/code/project");
     expect(result.block).toBe(true);
   });
 

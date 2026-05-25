@@ -61,11 +61,18 @@ describe("hooks/hooks.json", () => {
     expect(bashEntry).toBeDefined();
   });
 
-  it("registers both hook commands", () => {
+  it("registers check-backslash-paths for Bash", () => {
     const bashEntry = config.hooks.PreToolUse.find((e) => e.matcher === "Bash");
-    expect(bashEntry?.hooks).toHaveLength(2);
+    expect(bashEntry?.hooks).toHaveLength(1);
     const commands = bashEntry!.hooks.map((h) => h.command);
     expect(commands.some((c) => c.includes("check-backslash-paths"))).toBe(true);
+  });
+
+  it("registers check-redundant-cd for Bash|PowerShell", () => {
+    const entry = config.hooks.PreToolUse.find((e) => e.matcher === "Bash|PowerShell");
+    expect(entry).toBeDefined();
+    expect(entry?.hooks).toHaveLength(1);
+    const commands = entry!.hooks.map((h) => h.command);
     expect(commands.some((c) => c.includes("check-redundant-cd"))).toBe(true);
   });
 });

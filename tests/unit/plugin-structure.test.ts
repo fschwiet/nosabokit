@@ -75,4 +75,10 @@ describe("hooks/hooks.json", () => {
     const commands = entry!.hooks.map((h) => h.command);
     expect(commands.some((c) => c.includes("check-redundant-cd"))).toBe(true);
   });
+
+  it("registers check-chained-git for Bash|PowerShell", () => {
+    const entries = config.hooks.PreToolUse.filter((e) => e.matcher === "Bash|PowerShell");
+    const commands = entries.flatMap((e) => e.hooks.map((h) => h.command));
+    expect(commands.some((c) => c.includes("check-chained-git"))).toBe(true);
+  });
 });

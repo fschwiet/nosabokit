@@ -1,6 +1,6 @@
 import { build } from "esbuild";
 
-const hooks = ["check-backslash-paths", "check-redundant-cd"];
+const hooks = ["check-backslash-paths", "check-redundant-cd", "check-chained-git"];
 
 for (const hook of hooks) {
   await build({

@@ -4,7 +4,11 @@ A Claude Code plugin where I can accumulate some claude configurations I care ab
 
 1. **Block backslash paths** — Prevents Bash commands that contain Windows-style backslash paths (e.g. `C:\Users\name`), which Git Bash silently mangles into escape sequences. Suggests using forward slashes instead.
 2. **Block redundant `cd`** — Prevents commands of the form `cd <current-dir> && <rest>`, which add unnecessary permission prompts without changing the working directory.
+3. **Block chained git commands** - Prevents commands like 'git add file.ts && git commit -m "test: add E2E tests"' asking the agent to run them individually.
+4. MCP server context7 - a happy accident, when you import a claude plugin it's .mcp.json gets picked up as well.
 
+Review the unit tests to see what variations the hooks are built to catch and the output they produce.
+   
 ## Prerequisites
 
 - Claude Code with plugin support
